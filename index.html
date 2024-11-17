@@ -68,6 +68,27 @@
             bottom: 0;
             width: 100%;
         }
+        pre {
+            white-space: pre-wrap; /* Since CSS 2.1 */
+            white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+            white-space: -pre-wrap; /* Opera 4-6 */
+            white-space: -o-pre-wrap; /* Opera 7 */
+            word-wrap: break-word; /* Internet Explorer 5.5+ */
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-left: 3px solid #f36d33;
+            color: #666;
+            page-break-inside: avoid;
+            font-family: monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 1.6em;
+            max-width: 100%;
+            overflow: auto;
+            padding: 1em 1.5em;
+            display: block;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
@@ -90,8 +111,7 @@
         <div class="container">
             <article id="post">
                 <h2>我的博客文章标题</h2>
-                <p>这里是博客文章的摘要或者简介。</p>
-                <p>这里是博客文章的详细内容。</p>
+                <pre id="blogContent"></pre>
             </article>
         </div>
     </section>
@@ -99,5 +119,14 @@
     <footer>
         <p>版权所有 &copy; 2024 我的个人博客</p>
     </footer>
+
+    <script>
+        fetch('blog-post.txt')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('blogContent').textContent = data;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
 </body>
 </html>
